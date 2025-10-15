@@ -11,3 +11,4 @@ pipeline {
         success { echo 'Tests and run passed! Trunk is releasable.' }
         failure { echo 'Tests or run failed.' }
     }
+}
