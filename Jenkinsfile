@@ -16,9 +16,14 @@ pipeline {
                 bat 'pytest -v'
             }
         }
+        stage('Debug YFinance') {
+            steps {
+                bat 'python -c "import yfinance as yf; print(yf.Ticker(\'MSFT\').history(period=\'1d\'))" > yfinance_debug.txt'
+            }
+        }
         stage('Run') {
             steps {
-                bat 'start /wait streamlit run streamlit_app.py --server.port 8502 --server.headless true'
+                bat 'start /wait streamlit run streamlit_app.py --server.port 8502 --server.headless true --server.enableCORS false'
             }
         }
     }
